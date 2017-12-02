@@ -12,15 +12,60 @@ import java.util.Date;
  * @author user
  */
 public class Packages {
-   private String codePackage;
-   private int weights;
-   private double widths;
-   private double lengths;
-   private double heights;
-   private int price;
-   private String paymentMeyhod;
-   private Date sendDate;
-   
+
+    /**
+     * @return the deliveryType
+     */
+    public String getDeliveryType() {
+        return deliveryType;
+    }
+
+    /**
+     * @param deliveryType the deliveryType to set
+     */
+    public void setDeliveryType(String deliveryType) {
+        this.deliveryType = deliveryType;
+    }
+
+    /**
+     * @return the insurance
+     */
+    public Boolean getInsurance() {
+        return insurance;
+    }
+
+    /**
+     * @param insurance the insurance to set
+     */
+    public void setInsurance(Boolean insurance) {
+        this.insurance = insurance;
+    }
+
+    /**
+     * @return the destination
+     */
+    public String getDestination() {
+        return destination;
+    }
+
+    /**
+     * @param destination the destination to set
+     */
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+    private String codePackage;
+    private String type;
+    private double weights;
+    private double widths;
+    private double lengths;
+    private double heights;
+    private double price;
+    private String paymentMeyhod;
+    private Boolean insurance;
+    private Date sendDate;
+    private String destination;
+    private String deliveryType;
 
     public Packages() {
     }
@@ -42,14 +87,14 @@ public class Packages {
     /**
      * @return the weights
      */
-    public int getWeights() {
+    public double getWeights() {
         return weights;
     }
 
     /**
      * @param weights the weights to set
      */
-    public void setWeights(int weights) {
+    public void setWeights(double weights) {
         this.weights = weights;
     }
 
@@ -98,14 +143,14 @@ public class Packages {
     /**
      * @return the price
      */
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
     /**
      * @param price the price to set
      */
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -137,5 +182,18 @@ public class Packages {
         this.sendDate = sendDate;
     }
 
-   
+    /**
+     * @return the type
+     */
+    public String getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+
 }

@@ -12,8 +12,8 @@ package com.dugongsky.model;
 public class MasterCourrier {
 
     private String destination;
-    private double economyServices;
     private double regularServices;
+    private double kilatServices;
     private double overNightService;
     private double holiDayServices; 
     private double sameDayServices;
@@ -41,20 +41,6 @@ public class MasterCourrier {
     }
 
     /**
-     * @return the economyServices
-     */
-    public double getEconomyServices() {
-        return economyServices;
-    }
-
-    /**
-     * @param economyServices the economyServices to set
-     */
-    public void setEconomyServices(double economyServices) {
-        this.economyServices = economyServices;
-    }
-
-    /**
      * @return the regularServices
      */
     public double getRegularServices() {
@@ -66,6 +52,20 @@ public class MasterCourrier {
      */
     public void setRegularServices(double regularServices) {
         this.regularServices = regularServices;
+    }
+
+    /**
+     * @return the kilatServices
+     */
+    public double getKilatServices() {
+        return kilatServices;
+    }
+
+    /**
+     * @param kilatServices the kilatServices to set
+     */
+    public void setKilatServices(double kilatServices) {
+        this.kilatServices = kilatServices;
     }
 
     /**
