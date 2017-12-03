@@ -20,7 +20,7 @@ public class TestLogic {
  
         
         Packages package2 = new Packages();
-        package2.setDeliveryType("sds");
+        package2.setDeliveryType("regular");
         package2.setDestination("semarang");
         package2.setInsurance(false);
         package2.setCodePackage("1001");
