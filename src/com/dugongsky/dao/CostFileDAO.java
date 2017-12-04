@@ -16,7 +16,10 @@ import java.util.List;
 public class CostFileDAO {
 
     private final Double insurancePrecentage = 0.03;
-
+//    public double calcInsurance(){
+//    double totalInsurance=0.0;
+//    return totalInsurance;
+//    }
     public Double calcCost(Packages packages) {
         Double totalCost = 0.0;
         Double costdest;
@@ -77,4 +80,10 @@ public class CostFileDAO {
 
         return totalCost;
     }
+
+    @Override
+    public String toString() {
+        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }
