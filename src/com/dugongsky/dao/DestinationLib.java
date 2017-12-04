@@ -22,7 +22,8 @@ public class DestinationLib {
     public static List<MasterCourrier> getDestinationList(){
         List<MasterCourrier> destinationList= new ArrayList<>();
         try {
-            Scanner scan=new Scanner(new File("E:/FileTarif.txt"));
+            //Scanner scan=new Scanner(new File("E:/FileTarif.txt"));
+            Scanner scan=new Scanner(new File(DestinationLib.class.getResource("/com/dugongsky/asset/FileTarif.txt").getFile()));
             while (scan.hasNextLine()) {
                 MasterCourrier courrier= new MasterCourrier();
                 String line=scan.nextLine();
