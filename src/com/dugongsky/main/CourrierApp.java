@@ -7,6 +7,7 @@ package com.dugongsky.main;
 
 import com.dugongsky.dao.CostFileDAO;
 import com.dugongsky.dao.DestinationLib;
+import com.dugongsky.dao.ResiGen;
 import com.dugongsky.model.Customer;
 import com.dugongsky.model.MasterCourrier;
 import com.dugongsky.model.Packages;
@@ -31,7 +32,7 @@ public class CourrierApp extends javax.swing.JFrame {
     CostFileDAO cost;
     DestinationLib dest;
     MasterCourrier courrier;
-
+    
     /**
      * Creates new form CourrierApp
      */
@@ -625,6 +626,7 @@ public class CourrierApp extends javax.swing.JFrame {
 
         jLabel15.setText("No Paket");
 
+        noPaketText.setEditable(false);
         noPaketText.setEnabled(false);
 
         jLabel16.setText("Tanggal");
@@ -746,91 +748,92 @@ public class CourrierApp extends javax.swing.JFrame {
     }//GEN-LAST:event_panjangTextActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-try{
-        //Input Customer
-        customer = new Customer();
-        customer.setName(nameCustomerText.getText().trim());
-        customer.setCustomerAddress(addressCustomerTextArea.getText().trim());
-        customer.setCity((String) cityCustomerCombo.getSelectedItem());
-        customer.setPoscode(posCodeCustomerText.getText().trim());
-        customer.setPhoneCustomer(phoneCustomerText.getText().trim());
-        //Input Recipient
-        recipient = new Recipient();
-        recipient.setName(nameRecipientText.getText().trim());
-        recipient.setRecipientAddress(addressRecipientTextArea.getText().trim());
-        recipient.setPoscode(posCodeRecipientText.getText().trim());
-        recipient.setPhoneRecipient(phoneRecipientText.getText().trim());
-        recipient.setCity(kotaTujuanText.getText().trim());
-        //Asuransi
-        packages = new Packages();
-        if (yaRadioButton.isSelected()) {
-            packages.setInsurance(true);
-            //Proses
-            packages.setCodePackage(noPaketText.getText());
-            packages.setDeliveryType((String) layananCombo.getSelectedItem());
-            packages.setDestination(kotaTujuanText.getText());
-            packages.setPrice(Double.parseDouble(hargaBarangText.getText().trim()));
-            packages.setPaymentMeyhod((String) pembayaranCombo.getSelectedItem());
-            packages.setWeights(Double.parseDouble(beratText.getText().trim()));
-            packages.setSendDate(tanggalKirimDateChooser.getDate());
-            packages.setHeights(Double.parseDouble(tinggiText.getText().trim()));
-            packages.setLengths(Double.parseDouble(panjangText.getText().trim()));
-            packages.setWidths(Double.parseDouble(lebarText.getText().trim()));
-            cost = new CostFileDAO();
-            double total = cost.calcCost(packages);
-            SimpleDateFormat sdf = new SimpleDateFormat("MMMM, dd yyyy");
-            printOutTextArea.setText("Kode Paket : " + packages.getCodePackage() + "\n Tanggal : " + sdf.format(packages.getSendDate()));
-            //PrintOutCustomer
-            printOutTextArea.setText(printOutTextArea.getText() + "\n\nPengirim \t: " + customer.getName()
-                    + "\nAlamat \t: " + customer.getCustomerAddress() + ", " + customer.getCity()
-                    + "\n No Telp \t: " + customer.getPhoneCustomer() + " \n Poscode\t: " + customer.getPoscode());
-            //PrintOutRecipient
-            printOutTextArea.setText(printOutTextArea.getText() + "\n\nPenerima \t: " + recipient.getName()
-                    + "\nAlamat \t: " + recipient.getRecipientAddress() + ", " + recipient.getCity()
-                    + "\n No Telp \t: " + recipient.getPhoneRecipient() + " \n Poscode\t: " + recipient.getPoscode());
-            //Pembayaran
-            printOutTextArea.setText(printOutTextArea.getText() + "\n\nBiaya Pengiriman = " + total);
-            System.out.println("Pembayaran = " + total);
-            setEnableField(false);
+        try {
+            //Input Customer
+            customer = new Customer();
+            customer.setName(nameCustomerText.getText().trim());
+            customer.setCustomerAddress(addressCustomerTextArea.getText().trim());
+            customer.setCity((String) cityCustomerCombo.getSelectedItem());
+            customer.setPoscode(posCodeCustomerText.getText().trim());
+            customer.setPhoneCustomer(phoneCustomerText.getText().trim());
+            //Input Recipient
+            recipient = new Recipient();
+            recipient.setName(nameRecipientText.getText().trim());
+            recipient.setRecipientAddress(addressRecipientTextArea.getText().trim());
+            recipient.setPoscode(posCodeRecipientText.getText().trim());
+            recipient.setPhoneRecipient(phoneRecipientText.getText().trim());
+            recipient.setCity(kotaTujuanText.getText().trim());
+            //Asuransi
+            packages = new Packages();
+            if (yaRadioButton.isSelected()) {
+                packages.setInsurance(true);
+                //Proses
+                packages.setCodePackage(noPaketText.getText());
+                packages.setDeliveryType((String) layananCombo.getSelectedItem());
+                packages.setDestination(kotaTujuanText.getText());
+                packages.setPrice(Double.parseDouble(hargaBarangText.getText().trim()));
+                packages.setPaymentMeyhod((String) pembayaranCombo.getSelectedItem());
+                packages.setWeights(Double.parseDouble(beratText.getText().trim()));
+                packages.setSendDate(tanggalKirimDateChooser.getDate());
+                packages.setHeights(Double.parseDouble(tinggiText.getText().trim()));
+                packages.setLengths(Double.parseDouble(panjangText.getText().trim()));
+                packages.setWidths(Double.parseDouble(lebarText.getText().trim()));
+                cost = new CostFileDAO();
+                double total = cost.calcCost(packages);
+                SimpleDateFormat sdf = new SimpleDateFormat("MMMM, dd yyyy");
+                printOutTextArea.setText("Kode Paket : " + packages.getCodePackage() + "\n Tanggal : " + sdf.format(packages.getSendDate()));
+                //PrintOutCustomer
+                printOutTextArea.setText(printOutTextArea.getText() + "\n\nPengirim \t: " + customer.getName()
+                        + "\nAlamat \t: " + customer.getCustomerAddress() + ", " + customer.getCity()
+                        + "\n No Telp \t: " + customer.getPhoneCustomer() + " \n Poscode\t: " + customer.getPoscode());
+                //PrintOutRecipient
+                printOutTextArea.setText(printOutTextArea.getText() + "\n\nPenerima \t: " + recipient.getName()
+                        + "\nAlamat \t: " + recipient.getRecipientAddress() + ", " + recipient.getCity()
+                        + "\n No Telp \t: " + recipient.getPhoneRecipient() + " \n Poscode\t: " + recipient.getPoscode());
+                //Pembayaran
+                printOutTextArea.setText(printOutTextArea.getText() + "\n\nBiaya Pengiriman = " + total);
+                System.out.println("Pembayaran = " + total);
+                setEnableField(false);
 
-            saveButton.setEnabled(false);
-            newButton.setEnabled(true);
-        } else if (tidakRadioButton.isSelected()) {
-            packages.setInsurance(false);
-            //Proses
-            packages.setCodePackage(noPaketText.getText());
-            packages.setDeliveryType((String) layananCombo.getSelectedItem());
-            packages.setDestination(kotaTujuanText.getText());
+                saveButton.setEnabled(false);
+                newButton.setEnabled(true);
+            } else if (tidakRadioButton.isSelected()) {
+                packages.setInsurance(false);
+                //Proses
+                packages.setCodePackage(noPaketText.getText());
+                packages.setDeliveryType((String) layananCombo.getSelectedItem());
+                packages.setDestination(kotaTujuanText.getText());
 
-            packages.setPaymentMeyhod((String) pembayaranCombo.getSelectedItem());
-            packages.setWeights(Double.parseDouble(beratText.getText().trim()));
-            packages.setSendDate(tanggalKirimDateChooser.getDate());
+                packages.setPaymentMeyhod((String) pembayaranCombo.getSelectedItem());
+                packages.setWeights(Double.parseDouble(beratText.getText().trim()));
+                packages.setSendDate(tanggalKirimDateChooser.getDate());
 
-            cost = new CostFileDAO();
-            double total = cost.calcCost(packages);
-            SimpleDateFormat sdf = new SimpleDateFormat("MMMM, dd yyyy");
-            printOutTextArea.setText("Kode Paket : " + packages.getCodePackage() + "\n Tanggal : " + sdf.format(packages.getSendDate()));
-            //PrintOutCustomer
-            printOutTextArea.setText(printOutTextArea.getText() + "\n\nPengirim \t: " + customer.getName()
-                    + "\nAlamat \t: " + customer.getCustomerAddress() + ", " + customer.getCity()
-                    + "\n No Telp \t: " + customer.getPhoneCustomer() + " \n Poscode\t: " + customer.getPoscode());
-            //PrintOutRecipient
-            printOutTextArea.setText(printOutTextArea.getText() + "\n\nPenerima \t: " + recipient.getName()
-                    + "\nAlamat \t: " + recipient.getRecipientAddress() + ", " + recipient.getCity()
-                    + "\n No Telp \t: " + recipient.getPhoneRecipient() + " \n Poscode\t: " + recipient.getPoscode());
-            //Pembayaran
-            printOutTextArea.setText(printOutTextArea.getText() + "\n\nBiaya Pengiriman = " + total);
-            System.out.println("Pembayaran = " + total);
-            setEnableField(false);
+                cost = new CostFileDAO();
+                double total = cost.calcCost(packages);
+                SimpleDateFormat sdf = new SimpleDateFormat("MMMM, dd yyyy");
+                
+                printOutTextArea.setText("Kode Paket : " + packages.getCodePackage() + "\n Tanggal : " + sdf.format(packages.getSendDate()));
+                //PrintOutCustomer
+                printOutTextArea.setText(printOutTextArea.getText() + "\n\nPengirim \t: " + customer.getName()
+                        + "\nAlamat \t: " + customer.getCustomerAddress() + ", " + customer.getCity()
+                        + "\n No Telp \t: " + customer.getPhoneCustomer() + " \n Poscode\t: " + customer.getPoscode());
+                //PrintOutRecipient
+                printOutTextArea.setText(printOutTextArea.getText() + "\n\nPenerima \t: " + recipient.getName()
+                        + "\nAlamat \t: " + recipient.getRecipientAddress() + ", " + recipient.getCity()
+                        + "\n No Telp \t: " + recipient.getPhoneRecipient() + " \n Poscode\t: " + recipient.getPoscode());
+                //Pembayaran
+                printOutTextArea.setText(printOutTextArea.getText() + "\n\nBiaya Pengiriman = Rp." + total);
+                System.out.println("Pembayaran = " + total);
+                setEnableField(false);
 
-            saveButton.setEnabled(false);
-            newButton.setEnabled(true);
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Pilih Asuransi");
+                saveButton.setEnabled(false);
+                newButton.setEnabled(true);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Pilih Asuransi");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Masukan Data Dengan Benar ");
         }
-}catch(Exception e){
-JOptionPane.showMessageDialog(rootPane, "Masukan Data Dengan Benar ");
-}
         // TODO add your handling code here:
     }//GEN-LAST:event_saveButtonActionPerformed
 
@@ -850,6 +853,8 @@ JOptionPane.showMessageDialog(rootPane, "Masukan Data Dengan Benar ");
         clearAll();
         saveButton.setEnabled(true);
         newButton.setEnabled(false);
+        noPaketText.setText(ResiGen.generateNoResi());
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_newButtonActionPerformed
 
